@@ -54,7 +54,7 @@ public class ProcessTest {
     public static void main(String[] args) throws Exception {
         ProcessTest te = new ProcessTest();
         BlockchainUtils blockchainUtil = new BlockchainUtils();
-
+        
        te.subToMonitor();
         //te.subToRules();
        // te.subToMessages("0xacc5c5b63c1ab16ae703a7e6d7c31fc4527e0234");
@@ -63,8 +63,8 @@ public class ProcessTest {
         blockchainUtil.wrapper("ProcessTemplate");
         blockchainUtil.wrapper("ProcessMonitor");*/
         
-        
-        
+         
+       System.out.println("Processore off-chain in ascolto");
         
 
     }
