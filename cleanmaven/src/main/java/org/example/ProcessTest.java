@@ -45,7 +45,6 @@ import org.example.ethereum.*;
 //import com.sample.Process;
 
 
-
 public class ProcessTest {
 
     BigInteger lastEventBlockNumber = BigInteger.valueOf(0L);
@@ -54,26 +53,22 @@ public class ProcessTest {
     public static void main(String[] args) throws Exception {
         ProcessTest te = new ProcessTest();
         BlockchainUtils blockchainUtil = new BlockchainUtils();
-        
-       te.subToMonitor();
+
+        te.subToMonitor();
         //te.subToRules();
-       // te.subToMessages("0xacc5c5b63c1ab16ae703a7e6d7c31fc4527e0234");
+        // te.subToMessages("0xacc5c5b63c1ab16ae703a7e6d7c31fc4527e0234");
         //te.executeMessage(blockchainUtil);
         /*blockchainUtil.compile("ProcessTemplate");
         blockchainUtil.wrapper("ProcessTemplate");
         blockchainUtil.wrapper("ProcessMonitor");*/
-        
-         
-       System.out.println("Processore off-chain in ascolto");
-        
-
+        System.out.println("Processore off-chain in ascolto");
     }
 
-    public void subToMonitor(){
+    public void subToMonitor() {
         BlockchainUtils blockchainUtil = new BlockchainUtils();
         ProcessMonitor monitor = blockchainUtil.loadMonitor();
         monitor.newContractEventFlowable(DefaultBlockParameterName.LATEST, DefaultBlockParameterName.LATEST).
-                subscribe((eventResponse) ->{
+                subscribe((eventResponse) -> {
                     String newContractAddress = eventResponse.newContract;
                     System.out.println("New contract captured: " + newContractAddress);
                     subToMessages(newContractAddress);
@@ -85,15 +80,14 @@ public class ProcessTest {
         BlockchainUtils blockchainUtil = new BlockchainUtils();
         BigInteger latestBlock = blockchainUtil.getLatestBlockNumber();
         System.out.println("Listening from block number: " + latestBlock);
-
         Utils util = new Utils();
         ProcessTemplate contract = blockchainUtil.loadContract(address);
         System.out.println("Listening at address: " + contract.getContractAddress());
         contract.newRuleEventFlowable(DefaultBlockParameter.valueOf(latestBlock), DefaultBlockParameterName.PENDING).
-                subscribe( (eventResponse) -> {
+                subscribe((eventResponse) -> {
                     System.out.println("Listening from block number: " + latestBlock);
                     int checkLastEvent = lastRuleBlockNumber.compareTo(eventResponse.log.getBlockNumber());
-                    if( checkLastEvent == -1) {
+                    if (checkLastEvent == -1) {
                         lastRuleBlockNumber = eventResponse.log.getBlockNumber();
                         //getting ids and rules from the event
                         ArrayList messageId = (ArrayList) eventResponse.messageId;
@@ -102,7 +96,7 @@ public class ProcessTest {
                         List<String> idList = new ArrayList<>();
                         List<String> ruleList = new ArrayList<>();
                         //for each id cast id and rule first to byte then to string and finally add them to the lists
-                        for(int i = 0; i < messageId.size(); i++) {
+                        for (int i = 0; i < messageId.size(); i++) {
                             byte[] idByte = ((Utf8String) messageId.get(i)).getValue().getBytes(StandardCharsets.UTF_8);
                             byte[] ruleByte = ((Utf8String) rules.get(i)).getValue().getBytes(StandardCharsets.UTF_8);
                             String idString = new String(idByte, StandardCharsets.UTF_8);
@@ -111,13 +105,11 @@ public class ProcessTest {
                             ruleList.add(ruleString);
                             System.out.println("id: " + idString);
                             System.out.println("rule: " + ruleString);
-
                         }
-                       // util.insertRules(ruleList);
+                        // util.insertRules(ruleList);
                     }
                 });
     }
-
 
     public void subToMessages(String address) throws Exception {
         Utils u = new Utils();
@@ -126,15 +118,15 @@ public class ProcessTest {
         BigInteger latestBlock = blockchainUtil.getLatestBlockNumber();
         System.out.println("Listening from block number: " + latestBlock);
         contract.messageExecuteEventFlowable(DefaultBlockParameter.valueOf(latestBlock), DefaultBlockParameterName.LATEST).
-                subscribe( (eventResponse) -> {
+                subscribe((eventResponse) -> {
                     System.out.println("Listening from block number: " + latestBlock);
                     int checkLastEvent = lastEventBlockNumber.compareTo(eventResponse.log.getBlockNumber());
-                    if( checkLastEvent == -1) {
+                    if (checkLastEvent == -1) {
                         lastEventBlockNumber = eventResponse.log.getBlockNumber();
                         String messageId = eventResponse.messageId;
                         ArrayList inputs = (ArrayList) eventResponse.inputs;
                         List<String> stringList = new ArrayList<>();
-                        for(int i = 0; i < inputs.size(); i++) {
+                        for (int i = 0; i < inputs.size(); i++) {
                             byte[] byteValue = ((Utf8String) inputs.get(i)).getValue().getBytes(StandardCharsets.UTF_8);
                             String stringValue = new String(byteValue, StandardCharsets.UTF_8);
                             stringList.add(stringValue);
@@ -150,72 +142,50 @@ public class ProcessTest {
                 });
     }
 
-    public void executeMessage(BlockchainUtils blockchainUtil){
-    	
-    	 KieServices ks = KieServices.Factory.get();
-         KieRepository kr = ks.getRepository();
-         KieFileSystem kfs = ks.newKieFileSystem();
-     
-  
-         try {
-			kfs.write("src/main/resources/r1.drl", new String ( Files.readAllBytes( Paths.get(Utils.ruleFile.getAbsolutePath()))));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-         
-         // Add KieFileSystem to KieBuilder
-         KieBuilder kb = ks.newKieBuilder(kfs);
-  
-                 
-         kb.buildAll();
-         
-         
-         
-         if (kb.getResults().hasMessages(Message.Level.ERROR)) {
-             throw new RuntimeException("Build Errors:\n" + kb.getResults().toString());
-         }
-  
-        
-          
-    	
-    
-         KieContainer kc=ks.newKieContainer(kr.getDefaultReleaseId());
-      
+    public void executeMessage(BlockchainUtils blockchainUtil) {
+
+        KieServices ks = KieServices.Factory.get();
+        KieRepository kr = ks.getRepository();
+        KieFileSystem kfs = ks.newKieFileSystem();
+
+        try {
+            kfs.write("src/main/resources/r1.drl", new String(Files.readAllBytes(Paths.get(Utils.ruleFile.getAbsolutePath()))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Add KieFileSystem to KieBuilder
+        KieBuilder kb = ks.newKieBuilder(kfs);
+        kb.buildAll();
+
+        if (kb.getResults().hasMessages(Message.Level.ERROR)) {
+            throw new RuntimeException("Build Errors:\n" + kb.getResults().toString());
+        }
+
+        KieContainer kc = ks.newKieContainer(kr.getDefaultReleaseId());
         KieSession kSession = kc.newKieSession();
-    
-
-        kSession.insert( blockchainUtil );
-
+        kSession.insert(blockchainUtil);
         kSession.fireAllRules();
         kSession.dispose();
         System.out.println("Rules executed");
-        
- 
-        
-        
     }
 
     public void reviewexecuteMessage(BlockchainUtils blockchainUtil) {
-
-
-
         KieServices ks = KieServices.Factory.get();
-        System.out.println("ks: "+ ks);
+        System.out.println("ks: " + ks);
         //File f = new File("META-INF/kmodule.xml");
         //ClassLoader c = f.getClass().getClassLoader();
         //KieContainer kc = ks.getKieClasspathContainer(this.getClass().getClassLoader());
         //KieContainer kc = ks.getKieClasspathContainer();
         KieContainer kc = ks.newKieClasspathContainer();
         Results result = kc.verify();
-        if(!result.hasMessages(Message.Level.ERROR)){
+        if (!result.hasMessages(Message.Level.ERROR)) {
             KieSession ksession = kc.newKieSession("HelloWorldKS");
             ksession.insert(blockchainUtil);
             System.out.println(result);
             ksession.fireAllRules();
             System.out.println("Rules executed");
             ksession.dispose();
-        }else
+        } else
             System.out.println(result);
 
     }

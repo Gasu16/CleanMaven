@@ -2,12 +2,14 @@ package org.example.ethereum;
 
 import io.reactivex.Flowable;
 import io.reactivex.functions.Function;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
+
 import org.web3j.abi.EventEncoder;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Bool;
@@ -34,7 +36,7 @@ import org.web3j.tx.gas.ContractGasProvider;
  * <p>Auto generated code.
  * <p><strong>Do not modify!</strong>
  * <p>Please use the <a href="https://docs.web3j.io/command_line.html">web3j command line tools</a>,
- * or the org.web3j.codegen.SolidityFunctionWrapperGenerator in the 
+ * or the org.web3j.codegen.SolidityFunctionWrapperGenerator in the
  * <a href="https://github.com/web3j/web3j/tree/master/codegen">codegen module</a> to update.
  *
  * <p>Generated with web3j version 4.8.4.
@@ -67,12 +69,16 @@ public class ProcessTemplate extends Contract {
 
     public static final String FUNC_STRINGTOUINT = "stringToUint";
 
-    public static final Event MESSAGEEXECUTE_EVENT = new Event("messageExecute", 
-            Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}, new TypeReference<DynamicArray<Utf8String>>() {}));
+    public static final Event MESSAGEEXECUTE_EVENT = new Event("messageExecute",
+            Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {
+            }, new TypeReference<DynamicArray<Utf8String>>() {
+            }));
     ;
 
-    public static final Event NEWRULE_EVENT = new Event("newRule", 
-            Arrays.<TypeReference<?>>asList(new TypeReference<DynamicArray<Utf8String>>() {}, new TypeReference<DynamicArray<Utf8String>>() {}));
+    public static final Event NEWRULE_EVENT = new Event("newRule",
+            Arrays.<TypeReference<?>>asList(new TypeReference<DynamicArray<Utf8String>>() {
+            }, new TypeReference<DynamicArray<Utf8String>>() {
+            }));
     ;
 
     @Deprecated
@@ -161,49 +167,51 @@ public class ProcessTemplate extends Contract {
 
     public RemoteFunctionCall<TransactionReceipt> addRules(List<String> messageIds, List<String> newRrules) {
         final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(
-                FUNC_ADDRULES, 
+                FUNC_ADDRULES,
                 Arrays.<Type>asList(new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(messageIds, org.web3j.abi.datatypes.Utf8String.class)), 
-                new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(newRrules, org.web3j.abi.datatypes.Utf8String.class))), 
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(messageIds, org.web3j.abi.datatypes.Utf8String.class)),
+                        new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(newRrules, org.web3j.abi.datatypes.Utf8String.class))),
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> deleteRules(List<String> ids) {
         final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(
-                FUNC_DELETERULES, 
+                FUNC_DELETERULES,
                 Arrays.<Type>asList(new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
                         org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(ids, org.web3j.abi.datatypes.Utf8String.class))), 
+                        org.web3j.abi.Utils.typeMap(ids, org.web3j.abi.datatypes.Utf8String.class))),
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> executeMessage(String messageToExecute, List<String> inputs) {
         final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(
-                FUNC_EXECUTEMESSAGE, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(messageToExecute), 
-                new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(inputs, org.web3j.abi.datatypes.Utf8String.class))), 
+                FUNC_EXECUTEMESSAGE,
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(messageToExecute),
+                        new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(inputs, org.web3j.abi.datatypes.Utf8String.class))),
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<Boolean> getBool(String variable) {
-        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETBOOL, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(variable)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETBOOL,
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(variable)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, Boolean.class);
     }
 
     public RemoteFunctionCall<List> getIDs() {
-        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETIDS, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<DynamicArray<Utf8String>>() {}));
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETIDS,
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<DynamicArray<Utf8String>>() {
+                }));
         return new RemoteFunctionCall<List>(function,
                 new Callable<List>() {
                     @Override
@@ -216,67 +224,72 @@ public class ProcessTemplate extends Contract {
     }
 
     public RemoteFunctionCall<BigInteger> getInt(String variable) {
-        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETINT, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(variable)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETINT,
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(variable)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteFunctionCall<BigInteger> getMessage(String messageId) {
-        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETMESSAGE, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(messageId)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint8>() {}));
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETMESSAGE,
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(messageId)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint8>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteFunctionCall<String> getRule(String messageId) {
-        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETRULE, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(messageId)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETRULE,
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(messageId)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
     public RemoteFunctionCall<String> getString(String variable) {
-        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETSTRING, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(variable)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_GETSTRING,
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(variable)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
     public RemoteFunctionCall<TransactionReceipt> setRules(List<String> messageId, List<String> rule) {
         final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(
-                FUNC_SETRULES, 
+                FUNC_SETRULES,
                 Arrays.<Type>asList(new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(messageId, org.web3j.abi.datatypes.Utf8String.class)), 
-                new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(rule, org.web3j.abi.datatypes.Utf8String.class))), 
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(messageId, org.web3j.abi.datatypes.Utf8String.class)),
+                        new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(rule, org.web3j.abi.datatypes.Utf8String.class))),
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<TransactionReceipt> setVariables(List<String> types, List<String> variables, List<String> values, String messageID) {
         final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(
-                FUNC_SETVARIABLES, 
+                FUNC_SETVARIABLES,
                 Arrays.<Type>asList(new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(types, org.web3j.abi.datatypes.Utf8String.class)), 
-                new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(variables, org.web3j.abi.datatypes.Utf8String.class)), 
-                new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
-                        org.web3j.abi.datatypes.Utf8String.class,
-                        org.web3j.abi.Utils.typeMap(values, org.web3j.abi.datatypes.Utf8String.class)), 
-                new org.web3j.abi.datatypes.Utf8String(messageID)), 
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(types, org.web3j.abi.datatypes.Utf8String.class)),
+                        new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(variables, org.web3j.abi.datatypes.Utf8String.class)),
+                        new org.web3j.abi.datatypes.DynamicArray<org.web3j.abi.datatypes.Utf8String>(
+                                org.web3j.abi.datatypes.Utf8String.class,
+                                org.web3j.abi.Utils.typeMap(values, org.web3j.abi.datatypes.Utf8String.class)),
+                        new org.web3j.abi.datatypes.Utf8String(messageID)),
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteFunctionCall<BigInteger> stringToUint(String s) {
-        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_STRINGTOUINT, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(s)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_STRINGTOUINT,
+                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(s)),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
