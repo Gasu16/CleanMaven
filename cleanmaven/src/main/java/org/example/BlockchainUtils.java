@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.example.ethereum.ProcessMonitor;
 import org.example.ethereum.ProcessTemplate;
 import org.web3j.codegen.SolidityFunctionWrapperGenerator;
@@ -24,7 +25,7 @@ import org.web3j.tx.gas.DefaultGasProvider;
 
 public class BlockchainUtils {
 
-    String projectPath = "src"+ File.separator+"main"+File.separator+"java"+File.separator+"org"+File.separator+"example";
+    String projectPath = "src" + File.separator + "main" + File.separator + "java" + File.separator + "org" + File.separator + "example";
 
     Web3j web3 = Web3j.build(new HttpService("https://rinkeby.infura.io/v3/165cba6af9774e1aaa692e914a0cfbbb"));
     Admin adm = Admin.build(new HttpService("http://193.205.92.133:8545"));
@@ -43,8 +44,8 @@ public class BlockchainUtils {
         String abiPath = path + parseName(fileName, ".abi");
         String binPath = path + parseName(fileName, ".bin");
 
-        String[] args2 = { "-a", abiPath, "-b", binPath, "-o", projectPath + File.separator, "-p",
-                "ethereum", };
+        String[] args2 = {"-a", abiPath, "-b", binPath, "-o", projectPath + File.separator, "-p",
+                "ethereum",};
 
         SolidityFunctionWrapperGenerator.main(args2);
     }
@@ -53,7 +54,7 @@ public class BlockchainUtils {
         String fin = parseName(fileName, ".sol");
         String solPath = projectPath + File.separator + "ethereum" + File.separator + fin;
         String destinationPath = projectPath + File.separator + "ethereum";
-        String[] comm = { "solc", solPath, "--bin", "--abi", "--overwrite", "-o", destinationPath };
+        String[] comm = {"solc", solPath, "--bin", "--abi", "--overwrite", "-o", destinationPath};
         Runtime rt = Runtime.getRuntime();
         java.lang.Process p = rt.exec(comm);
         BufferedReader bri = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -70,9 +71,9 @@ public class BlockchainUtils {
         p.waitFor();
     }
 
-   // 0x62A18a87Ba55FB2c26bBB18ccD07F9847e24C29d
+    // 0x62A18a87Ba55FB2c26bBB18ccD07F9847e24C29d
 
-    public ProcessMonitor loadMonitor(){
+    public ProcessMonitor loadMonitor() {
         TransactionManager m = new RawTransactionManager(web3, credentials, ChainIdLong.RINKEBY);
         ContractGasProvider c = new DefaultGasProvider();
         return ProcessMonitor.load("0x48C49978328758080f2fB8ABA79205EF97Bf806E",
@@ -88,8 +89,6 @@ public class BlockchainUtils {
         System.out.println(response.get(0).newContract);
         return response.get(0).newContract;
     }*/
-
-
 
     public static String parseName(String name, String extension) {
         String[] oldName = name.split("\\.");
@@ -112,14 +111,11 @@ public class BlockchainUtils {
                 credentials,
                 GAS_PRICE,
                 GAS_LIMIT);*/
-
-
     }
 
     public BigInteger getLatestBlockNumber() throws Exception {
         return web3.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, false).send().getBlock().getNumber();
     }
-
 
 
     public String getStringFromContract(String variable) throws Exception {

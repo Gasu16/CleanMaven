@@ -6,7 +6,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -46,7 +45,6 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.10.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.10.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: org.web3j:codegen:4.8.4" level="project" />
     <orderEntry type="library" name="Maven: com.squareup:kotlinpoet:1.5.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.jetbrains.kotlin:kotlin-reflect:1.3.61" level="project" />
@@ -110,5 +108,7 @@
     <orderEntry type="library" name="Maven: com.zaxxer:SparseBitSet:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.drools:drools-templates:7.51.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.kie:kie-internal:7.51.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.32" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.32" level="project" />
   </component>
 </module>
